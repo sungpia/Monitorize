@@ -1,0 +1,36 @@
+version: '3'
+
+volumes:
+  django_sample_db_dev: {}
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./docker/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=monitorize
+      - POSTGRES_USER=sungpi
+      - POSTGRES_PASSWORD=sungpi
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile
+    environment:
+      - DJANGO_DEBUG=True
+      - DJANGO_DB_HOST=db
+      - DJANGO_DB_PORT=5432
+      - DJANGO_DB_NAME=monitorize
+      - DJANGO_DB_USERNAME=sungpi
+      - DJANGO_DB_PASSWORD=sungpi
+      - DJANGO_SECRET_KEY=dev_secret_key
+    ports:
+      - "9999:8000"
+    command:
+      - bash
+      - -c
+      - |
+        python manage.py migrate
+        python manage.py runserver 0:8000
