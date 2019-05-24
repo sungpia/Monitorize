@@ -1,2 +1,4 @@
 *.pyc
 ./docker
+*.swp
+app/migrations
