@@ -10,10 +10,7 @@ RUN apt-get update && apt-get -y install \
 
 WORKDIR /app
 
-ADD    requirements.txt    /app/
+ADD    .    /app/
 RUN    pip install --trusted-host pypi.python.org -r requirements.txt
-
-ADD    ./monitorize    /app/monitorize
-ADD    ./manage.py     /app/
 
 CMD ["python", "manage.py", "runserver", "0:8000"]
