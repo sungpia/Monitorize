@@ -15,8 +15,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include, path
+from app import views
 
 urlpatterns = [
-	path('app/', include('app.urls')),
+	path('message/', views.message), 
 	url(r'^admin/', admin.site.urls),
 ]
+

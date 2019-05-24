@@ -1,0 +1,9 @@
+{% if msg %}
+    <ul>
+    {% for message in msg %}
+        <li>{{ message.message }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
